@@ -69,10 +69,10 @@ const Dashboard = () => {
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b">Name</th>
-                <th className="py-2 px-4 border-b">Email</th>
-                <th className="py-2 px-4 border-b">Role</th>
-                <th className="py-2 px-4 border-b">Actions</th>
+                <th className="py-2 px-4 border-b text-left">Name</th>
+                <th className="py-2 px-4 border-b text-left">Email</th>
+                <th className="py-2 px-4 border-b text-left">Role</th>
+                <th className="py-2 px-4 border-b text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -100,10 +100,10 @@ const Dashboard = () => {
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b">Title</th>
-                <th className="py-2 px-4 border-b">Company</th>
-                <th className="py-2 px-4 border-b">Posted By</th>
-                <th className="py-2 px-4 border-b">Actions</th>
+                <th className="py-2 px-4 border-b text-left">Title</th>
+                <th className="py-2 px-4 border-b text-left">Company</th>
+                <th className="py-2 px-4 border-b text-left">Posted By</th>
+                <th className="py-2 px-4 border-b text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
