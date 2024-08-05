@@ -23,7 +23,7 @@ router.delete(
   isAuthorized("Employer"),
   deleteJob
 );
-router.delete("/deletebyadmin/:id", isAuthenticatedAdmin, deleteJob);
+router.delete("/deletebyadmin/:id", deleteJob);
 router.get("/get/:id", getASingleJob);
 
 export default router;

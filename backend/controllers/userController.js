@@ -116,6 +116,31 @@ export const getUser = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+//get all user
+
+export const getAllUsers = catchAsyncErrors(async (req, res, next) => {
+  const { role, searchKeyword } = req.query;
+  const query = {};
+  if (role) {
+    query.role = role;
+  }
+  if (searchKeyword) {
+    query.$or = [
+      { name: { $regex: searchKeyword, $options: "i" } },
+      { email: { $regex: searchKeyword, $options: "i" } },
+      { phone: { $regex: searchKeyword, $options: "i" } },
+    ];
+  }
+  const users = await User.find(query);
+  res.status(200).json({
+    success: true,
+    users,
+    count: users.length,
+  });
+});
+
+//get all user
+
 export const updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
@@ -186,4 +211,19 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
   user.password = req.body.newPassword;
   await user.save();
   sendToken(user, 200, res, "Password updated successfully.");
+});
+
+//delete user
+
+export const deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return next(new ErrorHandler("User not found.", 404));
+  }
+  await user.deleteOne();
+  res.status(200).json({
+    success: true,
+    message: "User deleted.",
+  });
 });

@@ -84,7 +84,7 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
       { introduction: { $regex: searchKeyword, $options: "i" } },
     ];
   }
-  const jobs = await Job.find(query);
+  const jobs = await Job.find(query).populate("postedBy", "email");
   res.status(200).json({
     success: true,
     jobs,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearAllUserErrors, login } from "../store/slices/userSlice";
@@ -36,7 +36,7 @@ const Login = () => {
     if (isAuthenticated) {
       navigateTo("/");
     }
-  }, [dispatch, error, loading, isAuthenticated]);
+  }, [dispatch, error, loading, isAuthenticated, navigateTo]);
 
   return (
     <>
