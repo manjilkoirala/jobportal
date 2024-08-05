@@ -470,9 +470,8 @@ footer div ul a span {
 
 .authPage {
   display: flex;
-  gap: 20px;
   min-width: 1500px;
-  width: 100%;
+  max-width: 1500px;
   margin: 0 auto;
   min-height: 100vh;
 }
