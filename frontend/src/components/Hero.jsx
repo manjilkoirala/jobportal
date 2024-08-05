@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const router = useNavigate();
   return (
-    <section className="relative flex lg:flex-row flex-col justify-between bg-white px-10 pt-10  overflow-hidden">
-      <div className="max-w-3xl py-20 2xl:pr-20 2xl:pl-10">
+    <section className="relative flex lg:flex-row flex-col justify-between bg-white px-10  py-20  overflow-hidden">
+      <div className="max-w-3xl  2xl:pr-20 2xl:pl-10">
         <h1 className="xl:text-7xl lg:text-6xl text-5xl font-bold xl:leading-tight leading-snug overflow-y-hidden upp">
           Find Your Dream Job Today
         </h1>
