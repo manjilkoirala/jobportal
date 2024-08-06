@@ -30,11 +30,11 @@ export const isAuthorized = (...roles) => {
 };
 
 export const isAuthenticatedAdmin = catchAsyncErrors(async (req, res, next) => {
-  const { token } = req.cookies;
-  if (!token) {
+  const { adminToken } = req.cookies;
+  if (!adminToken) {
     return next(new ErrorHandler("Admin is not authenticated.", 400));
   }
-  const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  const decoded = jwt.verify(adminToken, process.env.JWT_SECRET_KEY);
 
   req.admin = await Admin.findById(decoded.id);
 

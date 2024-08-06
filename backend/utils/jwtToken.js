@@ -14,3 +14,20 @@ export const sendToken = (user, statusCode, res, message) => {
     token,
   });
 };
+
+export const sendAdminToken = (admin, statusCode, res, message) => {
+  const token = admin.getJWTToken();
+  const options = {
+    expires: new Date(
+      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  res.status(statusCode).cookie("adminToken", token, options).json({
+    success: true,
+    admin,
+    message,
+    token,
+  });
+};

@@ -3,6 +3,7 @@ import ErrorHandler from "../middlewares/error.js";
 import { Application } from "../models/applicationSchema.js";
 import { Job } from "../models/jobSchema.js";
 import { v2 as cloudinary } from "cloudinary";
+import { sendEmail } from "../utils/sendEmail.js";
 
 export const postApplication = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
@@ -151,6 +152,15 @@ export const acceptApplication = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Application not found.", 404));
   }
   application.status = "accepted";
+
+  // Send email notification
+  const message = `Dear ${application.jobSeekerInfo.name},\n\nYour application for the job title "${application.jobInfo.jobTitle}" has been accepted.\n\nBest regards,\nThe Job Portal Team`;
+  await sendEmail({
+    email: application.jobSeekerInfo.email,
+    subject: "Application Accepted",
+    message,
+  });
+
   await application.save();
   res.status(200).json({
     success: true,
@@ -167,6 +177,15 @@ export const rejectApplication = catchAsyncErrors(async (req, res, next) => {
   }
   application.status = "rejected";
   await application.save();
+
+  // Send email notification
+  const message = `Dear ${application.jobSeekerInfo.name},\n\nYour application for the job title "${application.jobInfo.jobTitle}" has been rejected.\n\nBest regards,\nThe Job Portal Team`;
+  await sendEmail({
+    email: application.jobSeekerInfo.email,
+    subject: "Application Rejected",
+    message,
+  });
+
   res.status(200).json({
     success: true,
     message: "Application rejected.",
