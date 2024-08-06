@@ -86,7 +86,7 @@ const Applications = () => {
                     </p>
                     <div className="btn-wrapper">
                       <button
-                        className="outline_btn"
+                        className="outline_btn "
                         onClick={() => handleDeleteApplication(element._id)}
                       >
                         Delete Application

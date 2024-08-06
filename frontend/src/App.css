@@ -18,11 +18,12 @@ input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .btn,
 .black_btn,
 .outline_btn {
   background: #0E1630;
-  color: #fff;
+  color: #000;
   font-weight: 500;
   border: none;
   transition: 0.3s;
@@ -31,6 +32,10 @@ input::-webkit-outer-spin-button {
   max-width: fit-content;
   border-radius: 6px;
   text-decoration: none;
+}
+
+.btn{
+  color: #fff;
 }
 @media (max-width: 410px) {
   .btn,
@@ -1004,8 +1009,9 @@ footer div ul a span {
 .account_components .applications_container .card .btn-wrapper {
   display: flex;
   gap: 20px;
-  justify-content: flex-end;
+  flex-wrap: wrap;
   flex-direction: row;
+  width: 100%;
 }
 
 @media (max-width: 920px) {
