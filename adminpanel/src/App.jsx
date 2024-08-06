@@ -10,6 +10,8 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddAdmin from "./pages/AddAdmin"; // Import the AddAdmin component
+import Admin from "./pages/Admin"; // Import the Admin component
 
 function App() {
   return (
@@ -30,6 +32,22 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/add-admin"
+          element={
+            <ProtectedRoute>
+              <AddAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Admin />
             </ProtectedRoute>
           }
         />

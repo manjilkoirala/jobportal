@@ -100,3 +100,38 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
   await admin.save();
   sendToken(admin, 200, res, "Password updated successfully.");
 });
+
+export const deleteAdmin = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.params;
+  const admin = await Admin.findById(id);
+  if (!admin) {
+    return next(new ErrorHandler("Admin not found.", 404));
+  }
+  await admin.deleteOne();
+  res.status(200).json({
+    success: true,
+    message: "Admin deleted.",
+  });
+});
+
+//get all Admin
+
+export const getAllAdmin = catchAsyncErrors(async (req, res, next) => {
+  const { searchKeyword } = req.query;
+  const query = {};
+  if (searchKeyword) {
+    query.$or = [
+      { name: { $regex: searchKeyword, $options: "i" } },
+      { email: { $regex: searchKeyword, $options: "i" } },
+      { phone: { $regex: searchKeyword, $options: "i" } },
+    ];
+  }
+  const admins = await Admin.find(query);
+  res.status(200).json({
+    success: true,
+    admins,
+    count: admins.length,
+  });
+});
+
+//get all Admin
