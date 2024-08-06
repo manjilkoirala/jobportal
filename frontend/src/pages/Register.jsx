@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearAllUserErrors, register } from "../store/slices/userSlice";
@@ -81,9 +81,10 @@ const Register = () => {
       dispatch(clearAllUserErrors());
     }
     if (isAuthenticated) {
-      navigateTo("/");
+      toast.success(message);
+      navigateTo("/jobs");
     }
-  }, [dispatch, error, loading, isAuthenticated, message]);
+  }, [dispatch, error, loading, isAuthenticated, message, navigateTo]);
 
   return (
     <>
