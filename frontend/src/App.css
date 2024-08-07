@@ -573,6 +573,7 @@ footer div ul a span {
   text-decoration: none;
   border-radius: 7px;
 }
+
 .authPage .banner {
   flex: 2;
   display: flex;
@@ -616,6 +617,7 @@ footer div ul a span {
     display: none;
   }
 }
+
 
 .jobs {
   padding: 40px 100px;
@@ -1381,3 +1383,4 @@ button:disabled:hover {
   font-weight: 600;
 
 }
+

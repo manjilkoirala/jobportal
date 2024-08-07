@@ -81,6 +81,9 @@ const Login = () => {
                 <RiLock2Fill />
               </div>
             </div>
+            <Link className="" to="/forgot-password">
+              Forgot Password?
+            </Link>
             <button type="submit" disabled={loading}>
               Login
             </button>

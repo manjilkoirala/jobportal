@@ -3,6 +3,8 @@ import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { sendToken } from "../utils/jwtToken.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
   try {
@@ -207,6 +209,16 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler("New password & confirm password do not match.", 400)
     );
   }
+  // Check if new password is the same as the old password
+  const isSamePassword = await user.comparePassword(req.body.newPassword);
+  if (isSamePassword) {
+    return next(
+      new ErrorHandler(
+        "New password must be different from the old password.",
+        400
+      )
+    );
+  }
 
   user.password = req.body.newPassword;
   await user.save();
@@ -226,4 +238,91 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) => {
     success: true,
     message: "User deleted.",
   });
+});
+
+export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(new ErrorHandler("User not found with this email", 404));
+  }
+
+  // Get ResetPassword Token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  // Create reset password url
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+
+  const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email, then ignore it.`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Job Portal Password Recovery`,
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({ validateBeforeSave: false });
+
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+// Reset Password
+export const resetPassword = catchAsyncErrors(async (req, res, next) => {
+  console.log("Password", req.params.token);
+  // create token hash
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+  console.log("Hashed Token:", resetPasswordToken);
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        "Reset Password Token is invalid or has been expired",
+        400
+      )
+    );
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
+
+  // // Check if new password is the same as the old password
+  // const isSamePassword = await user.comparePassword(req.body.password);
+  // if (isSamePassword) {
+  //   return next(
+  //     new ErrorHandler(
+  //       "New password must be different from the old password.",
+  //       400
+  //     )
+  //   );
+  // }
+
+  user.password = req.body.password;
+
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+
+  sendToken(user, 200, res, "Password Reset Successful");
 });
