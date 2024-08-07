@@ -32,11 +32,17 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md flex flex-col items-center">
+        <label className="text-2xl font-bold text-center overflow-hidden">
+          Forgot Password
+        </label>
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center w-full"
+        >
+          <div className="my-4 w-full">
+            <label className="block text-gray-700 text-sm font-bold mb-2 ">
               Email
             </label>
             <input
@@ -44,13 +50,10 @@ const ForgotPassword = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none "
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
-          >
+          <button type="submit" className="btn">
             Send Reset Link
           </button>
         </form>

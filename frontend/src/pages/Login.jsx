@@ -81,9 +81,14 @@ const Login = () => {
                 <RiLock2Fill />
               </div>
             </div>
-            <Link className="" to="/forgot-password">
+
+            <p
+              onClick={() => navigateTo("/forgot-password")}
+              className="text-red-500 hover:cursor-pointer"
+            >
               Forgot Password?
-            </Link>
+            </p>
+
             <button type="submit" disabled={loading}>
               Login
             </button>

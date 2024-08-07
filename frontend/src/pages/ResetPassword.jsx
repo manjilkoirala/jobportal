@@ -24,9 +24,14 @@ const ResetPassword = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Reset Password</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+        <h2 className="text-2xl font-bold mb-6 text-center overflow-hidden">
+          Reset Password
+        </h2>
+        <form
+          className="w-full flex flex-col items-center"
+          onSubmit={handleSubmit}
+        >
+          <div className="mb-4 w-full">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               New Password
             </label>
@@ -35,10 +40,10 @@ const ResetPassword = () => {
               placeholder="Enter new password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none "
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 w-full">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Confirm Password
             </label>
@@ -47,13 +52,11 @@ const ResetPassword = () => {
               placeholder="Confirm new password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none "
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
-          >
+
+          <button type="submit" className="btn">
             Reset Password
           </button>
         </form>

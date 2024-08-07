@@ -209,16 +209,6 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler("New password & confirm password do not match.", 400)
     );
   }
-  // Check if new password is the same as the old password
-  const isSamePassword = await user.comparePassword(req.body.newPassword);
-  if (isSamePassword) {
-    return next(
-      new ErrorHandler(
-        "New password must be different from the old password.",
-        400
-      )
-    );
-  }
 
   user.password = req.body.newPassword;
   await user.save();
