@@ -8,6 +8,7 @@ import {
   resetJobSlice,
 } from "../store/slices/jobSlice";
 import { CiCircleInfo } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const JobPost = () => {
   const [title, setTitle] = useState("");
@@ -23,6 +24,7 @@ const JobPost = () => {
   const [hiringMultipleCandidates, setHiringMultipleCandidates] = useState("");
   const [personalWebsiteTitle, setPersonalWebsiteTitle] = useState("");
   const [personalWebsiteUrl, setPersonalWebsiteUrl] = useState("");
+  const navigate = useNavigate();
 
   const nichesArray = [
     "Software Development",
@@ -103,6 +105,7 @@ const JobPost = () => {
     if (message) {
       toast.success(message);
       dispatch(resetJobSlice());
+      navigate("/dashboard");
     }
   }, [dispatch, error, loading, message]);
 
