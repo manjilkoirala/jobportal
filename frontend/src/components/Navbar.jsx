@@ -39,7 +39,10 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
+        <GiHamburgerMenu
+          className="hamburger cursor-pointer"
+          onClick={() => setShow(!show)}
+        />
       </nav>
     </>
   );

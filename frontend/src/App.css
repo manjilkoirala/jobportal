@@ -98,12 +98,7 @@ input::-webkit-outer-spin-button {
   align-items: center;
   gap: 30px;
 }
-.navbar .logo h4 {
-  font-size: 26px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #dfdf07;
-}
+
 .navbar .logo img {
   width: 160px;
 }
@@ -118,18 +113,24 @@ input::-webkit-outer-spin-button {
 }
 .navbar .links ul li {
   list-style-type: none;
+  
 }
 .navbar .links ul li a {
   text-decoration: none;
   color: #444;
   transition: 0.3s;
+  font-weight: 600;
+  font-size: 22px;
+  
 }
 .navbar .links ul li a:hover {
-  color: #dfdf07;
+  color: #EA5D0B;
   transition: 0.3s;
+
 }
 .navbar .links ul:last-child {
-  gap: 10px;
+  gap: 20px;
+  
 }
 @media (max-width: 1320px) {
   .navbar .logo {
