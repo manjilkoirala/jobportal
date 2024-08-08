@@ -82,7 +82,7 @@ const Register = () => {
     }
     if (isAuthenticated) {
       toast.success(message);
-      navigateTo("/jobs");
+      navigateTo("/dashboard");
     }
   }, [dispatch, error, loading, isAuthenticated, message, navigateTo]);
 
