@@ -114,7 +114,7 @@ export const acceptApplication = (id) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForAcceptApplication());
   try {
     const response = await axios.put(
-      `http://localhost:4000/api/v1/application/accept/${id}`,
+      `${import.meta.env.VITE_BACKEND_URL}/application/accept/${id}`,
       {},
       { withCredentials: true }
     );
@@ -137,7 +137,7 @@ export const rejectApplication = (id) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForRejectApplication());
   try {
     const response = await axios.put(
-      `http://localhost:4000/api/v1/application/reject/${id}`,
+      `${import.meta.env.VITE_BACKEND_URL}/application/reject/${id}`,
       {},
       { withCredentials: true }
     );
@@ -160,7 +160,7 @@ export const fetchEmployerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForAllApplications());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/application/employer/getall`,
+      `${import.meta.env.VITE_BACKEND_URL}/application/employer/getall`,
       {
         withCredentials: true,
       }
@@ -184,7 +184,7 @@ export const fetchJobSeekerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForMyApplications());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/application/jobseeker/getall`,
+      `${import.meta.env.VITE_BACKEND_URL}/application/jobseeker/getall`,
       {
         withCredentials: true,
       }
@@ -208,7 +208,7 @@ export const postApplication = (data, jobId) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForPostApplication());
   try {
     const response = await axios.post(
-      `http://localhost:4000/api/v1/application/post/${jobId}`,
+      `${import.meta.env.VITE_BACKEND_URL}/application/post/${jobId}`,
       data,
       {
         withCredentials: true,
@@ -232,7 +232,7 @@ export const deleteApplication = (id) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForDeleteApplication());
   try {
     const response = await axios.delete(
-      `http://localhost:4000/api/v1/application/delete/${id}`,
+      `${import.meta.env.VITE_BACKEND_URL}/application/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(

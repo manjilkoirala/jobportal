@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-self-assign */
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -95,7 +96,7 @@ export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/user/register",
+      `${import.meta.env.VITE_BACKEND_URL}/user/register`,
       data,
       {
         withCredentials: true,
@@ -113,7 +114,7 @@ export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/user/login",
+      `${import.meta.env.VITE_BACKEND_URL}/user/login`,
       data,
       {
         withCredentials: true,
@@ -131,7 +132,7 @@ export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
     const response = await axios.get(
-      "http://localhost:4000/api/v1/user/getuser",
+      `${import.meta.env.VITE_BACKEND_URL}/user/getuser`,
       {
         withCredentials: true,
       }
@@ -148,7 +149,7 @@ export const forgotPassword = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
     await axios.post(
-      "http://localhost:4000/api/v1/user/forgot-password",
+      `${import.meta.env.VITE_BACKEND_URL}/user/forgot-password`,
       data,
       {
         withCredentials: true,
@@ -170,7 +171,7 @@ export const resetPassword = (data) => async (dispatch) => {
 
   try {
     await axios.put(
-      `http://localhost:4000/api/v1/user/reset-password/${data.token}`,
+      `${import.meta.env.VITE_BACKEND_URL}/user/reset-password/${data.token}`,
       data,
       {
         withCredentials: true,
@@ -189,7 +190,7 @@ export const resetPassword = (data) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://localhost:4000/api/v1/user/logout",
+      `${import.meta.env.VITE_BACKEND_URL}/user/logout`,
       {
         withCredentials: true,
       }

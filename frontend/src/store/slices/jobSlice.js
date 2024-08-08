@@ -1,3 +1,4 @@
+/* eslint-disable no-self-assign */
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -12,7 +13,7 @@ const jobSlice = createSlice({
     myJobs: [],
   },
   reducers: {
-    requestForAllJobs(state, action) {
+    requestForAllJobs(state) {
       state.loading = true;
       state.error = null;
     },
@@ -25,7 +26,7 @@ const jobSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    requestForSingleJob(state, action) {
+    requestForSingleJob(state) {
       state.message = null;
       state.error = null;
       state.loading = true;
@@ -40,7 +41,7 @@ const jobSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    requestForPostJob(state, action) {
+    requestForPostJob(state) {
       state.message = null;
       state.error = null;
       state.loading = true;
@@ -56,7 +57,7 @@ const jobSlice = createSlice({
       state.loading = false;
     },
 
-    requestForDeleteJob(state, action) {
+    requestForDeleteJob(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -72,7 +73,7 @@ const jobSlice = createSlice({
       state.message = null;
     },
 
-    requestForMyJobs(state, action) {
+    requestForMyJobs(state) {
       state.loading = true;
       state.myJobs = [];
       state.error = null;
@@ -88,11 +89,11 @@ const jobSlice = createSlice({
       state.error = action.payload;
     },
 
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
       state.jobs = state.jobs;
     },
-    resetJobSlice(state, action) {
+    resetJobSlice(state) {
       state.error = null;
       state.jobs = state.jobs;
       state.loading = false;
@@ -108,7 +109,7 @@ export const fetchJobs =
   async (dispatch) => {
     try {
       dispatch(jobSlice.actions.requestForAllJobs());
-      let link = "http://localhost:4000/api/v1/job/getall?";
+      let link = `${import.meta.env.VITE_BACKEND_URL}/job/getall?`;
       let queryParams = [];
       if (searchKeyword) {
         queryParams.push(`searchKeyword=${searchKeyword}`);
@@ -133,7 +134,7 @@ export const fetchSingleJob = (jobId) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForSingleJob());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/job/get/${jobId}`,
+      `${import.meta.env.VITE_BACKEND_URL}/job/get/${jobId}`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForSingleJob(response.data.job));
@@ -147,7 +148,7 @@ export const postJob = (data) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForPostJob());
   try {
     const response = await axios.post(
-      `http://localhost:4000/api/v1/job/post`,
+      `${import.meta.env.VITE_BACKEND_URL}/job/post`,
       data,
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
@@ -162,7 +163,7 @@ export const getMyJobs = () => async (dispatch) => {
   dispatch(jobSlice.actions.requestForMyJobs());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/job/getmyjobs`,
+      `${import.meta.env.VITE_BACKEND_URL}/job/getmyjobs`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForMyJobs(response.data.myJobs));
@@ -176,7 +177,7 @@ export const deleteJob = (id) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForDeleteJob());
   try {
     const response = await axios.delete(
-      `http://localhost:4000/api/v1/job/delete/${id}`,
+      `${import.meta.env.VITE_BACKEND_URL}/job/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForDeleteJob(response.data.message));
