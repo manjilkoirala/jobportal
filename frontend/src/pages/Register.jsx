@@ -21,6 +21,7 @@ const Register = () => {
     register: formRegister,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -64,6 +65,8 @@ const Register = () => {
     "Systems Administration",
     "IT Consulting",
   ];
+
+  const selectedRole = watch("role");
 
   return (
     <>
@@ -204,84 +207,83 @@ const Register = () => {
                 )}
               </div>
             </div>
-            {errors.role?.type === "value" &&
-              errors.role.message === "Job Seeker" && (
-                <>
-                  <div className="wrapper">
-                    <div className="inputTag">
-                      <label>Your First Niche</label>
-                      <div>
-                        <select
-                          {...formRegister("firstNiche", {
-                            required: "First niche is required",
-                          })}
-                        >
-                          <option value="">Your Niche</option>
-                          {nichesArray.map((niche, index) => (
-                            <option key={index} value={niche}>
-                              {niche}
-                            </option>
-                          ))}
-                        </select>
-                        <MdCategory />
-                      </div>
-                      {errors.firstNiche && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.firstNiche.message}
-                        </p>
-                      )}
+            {selectedRole === "Job Seeker" && (
+              <>
+                <div className="wrapper">
+                  <div className="inputTag">
+                    <label>Your First Niche</label>
+                    <div>
+                      <select
+                        {...formRegister("firstNiche", {
+                          required: "First niche is required",
+                        })}
+                      >
+                        <option value="">Your Niche</option>
+                        {nichesArray.map((niche, index) => (
+                          <option key={index} value={niche}>
+                            {niche}
+                          </option>
+                        ))}
+                      </select>
+                      <MdCategory />
                     </div>
-                    <div className="inputTag">
-                      <label>Your Second Niche</label>
-                      <div>
-                        <select {...formRegister("secondNiche")}>
-                          <option value="">Your Niche</option>
-                          {nichesArray.map((niche, index) => (
-                            <option key={index} value={niche}>
-                              {niche}
-                            </option>
-                          ))}
-                        </select>
-                        <MdCategory />
-                      </div>
-                    </div>
-                    <div className="inputTag">
-                      <label>Your Third Niche</label>
-                      <div>
-                        <select {...formRegister("thirdNiche")}>
-                          <option value="">Your Niche</option>
-                          {nichesArray.map((niche, index) => (
-                            <option key={index} value={niche}>
-                              {niche}
-                            </option>
-                          ))}
-                        </select>
-                        <MdCategory />
-                      </div>
+                    {errors.firstNiche && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.firstNiche.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="inputTag">
+                    <label>Your Second Niche</label>
+                    <div>
+                      <select {...formRegister("secondNiche")}>
+                        <option value="">Your Niche</option>
+                        {nichesArray.map((niche, index) => (
+                          <option key={index} value={niche}>
+                            {niche}
+                          </option>
+                        ))}
+                      </select>
+                      <MdCategory />
                     </div>
                   </div>
-                  <div className="wrapper">
-                    <div className="inputTag">
-                      <label>Cover Letter</label>
-                      <div>
-                        <textarea {...formRegister("coverLetter")} rows={10} />
-                      </div>
+                  <div className="inputTag">
+                    <label>Your Third Niche</label>
+                    <div>
+                      <select {...formRegister("thirdNiche")}>
+                        <option value="">Your Niche</option>
+                        {nichesArray.map((niche, index) => (
+                          <option key={index} value={niche}>
+                            {niche}
+                          </option>
+                        ))}
+                      </select>
+                      <MdCategory />
                     </div>
                   </div>
-                  <div className="wrapper">
-                    <div className="inputTag">
-                      <label>Resume</label>
-                      <div>
-                        <input
-                          type="file"
-                          {...formRegister("resume")}
-                          style={{ border: "none" }}
-                        />
-                      </div>
+                </div>
+                <div className="wrapper">
+                  <div className="inputTag">
+                    <label>Cover Letter</label>
+                    <div>
+                      <textarea {...formRegister("coverLetter")} rows={10} />
                     </div>
                   </div>
-                </>
-              )}
+                </div>
+                <div className="wrapper">
+                  <div className="inputTag">
+                    <label>Resume</label>
+                    <div>
+                      <input
+                        type="file"
+                        {...formRegister("resume")}
+                        style={{ border: "none" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
             <button type="submit" disabled={loading}>
               Register
             </button>

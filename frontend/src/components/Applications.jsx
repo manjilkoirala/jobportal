@@ -65,24 +65,40 @@ const Applications = () => {
                       {element.jobSeekerInfo.name}
                     </p>
                     <p className="sub-sec">
-                      <span>pplicant&apos;s Email:</span>{" "}
+                      <span>Applicant&apos;s Email:</span>{" "}
                       {element.jobSeekerInfo.email}
                     </p>
                     <p className="sub-sec">
-                      <span>pplicant&apos;s Phone: </span>{" "}
+                      <span>Applicant&apos;s Phone: </span>{" "}
                       {element.jobSeekerInfo.phone}
                     </p>
                     <p className="sub-sec">
-                      <span>pplicant&apos;s Address: </span>{" "}
+                      <span>Applicant&apos;s Address: </span>{" "}
                       {element.jobSeekerInfo.address}
                     </p>
                     <p className="sub-sec">
-                      <span>pplicant&apos;s CoverLetter: </span>
+                      <span>Applicant&apos;s CoverLetter: </span>
                       <textarea
                         value={element.jobSeekerInfo.coverLetter}
                         rows={5}
                         disabled
                       ></textarea>
+                    </p>
+                    <p className="sub-sec">
+                      <span>Status: </span>{" "}
+                      <p
+                        className="status"
+                        style={{
+                          color:
+                            element.status === "rejected"
+                              ? "#800101"
+                              : element.status === "accepted"
+                              ? "green"
+                              : "black",
+                        }}
+                      >
+                        {element.status}
+                      </p>
                     </p>
                     <div className="btn-wrapper">
                       <button
