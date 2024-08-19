@@ -262,26 +262,6 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
-                <div className="wrapper">
-                  <div className="inputTag">
-                    <label>Cover Letter</label>
-                    <div>
-                      <textarea {...formRegister("coverLetter")} rows={10} />
-                    </div>
-                  </div>
-                </div>
-                <div className="wrapper">
-                  <div className="inputTag">
-                    <label>Resume</label>
-                    <div>
-                      <input
-                        type="file"
-                        {...formRegister("resume")}
-                        style={{ border: "none" }}
-                      />
-                    </div>
-                  </div>
-                </div>
               </>
             )}
             <button type="submit" disabled={loading}>
