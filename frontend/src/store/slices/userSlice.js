@@ -3,7 +3,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 const userSlice = createSlice({
   name: "user",
@@ -144,8 +143,7 @@ export const getUser = () => async (dispatch) => {
   }
 };
 
-export const forgotPassword = (data) => async (dispatch) => {
-  const navigate = useNavigate();
+export const forgotPassword = (data, navigate) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
     await axios.post(
@@ -158,15 +156,14 @@ export const forgotPassword = (data) => async (dispatch) => {
     );
     dispatch(userSlice.actions.clearAllErrors());
     toast.success("Reset link sent to your email.");
-    navigate("/");
+    navigate("/login");
   } catch (error) {
     dispatch(userSlice.actions.registerFailed(error.response.data.message));
     toast.error(error.response.data.message);
   }
 };
 
-export const resetPassword = (data) => async (dispatch) => {
-  const navigate = useNavigate();
+export const resetPassword = (data, navigate) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
 
   try {

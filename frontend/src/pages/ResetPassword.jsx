@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { resetPassword } from "../store/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
   const { token } = useParams();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigateTo = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ const ResetPassword = () => {
       toast.error("Passwords do not match.");
       return;
     }
-    dispatch(resetPassword({ token, password, confirmPassword }));
+    dispatch(resetPassword({ token, password, confirmPassword }, navigateTo));
   };
 
   return (

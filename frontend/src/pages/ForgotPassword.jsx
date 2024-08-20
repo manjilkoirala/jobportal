@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(forgotPassword({ email }));
+    dispatch(forgotPassword({ email }, navigateTo));
   };
 
   useEffect(() => {

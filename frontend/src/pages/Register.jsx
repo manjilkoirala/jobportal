@@ -39,7 +39,7 @@ const Register = () => {
     }
     if (isAuthenticated) {
       toast.success(message);
-      navigateTo("/dashboard");
+      window.location.href = "/dashboard";
     }
   }, [dispatch, error, loading, isAuthenticated, message, navigateTo]);
 
